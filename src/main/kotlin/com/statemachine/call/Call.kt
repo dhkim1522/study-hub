@@ -1,8 +1,14 @@
 package com.statemachine.call
 
-import java.util.*
+import jakarta.persistence.*
 
+@Entity
+@Table
 class Call(
-    val id: Long = UUID.randomUUID().mostSignificantBits,
-    val state: CallState,
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long? = null,
+
+    @Column(nullable = false)
+    var state: CallState = CallState.WAIT,
 )
