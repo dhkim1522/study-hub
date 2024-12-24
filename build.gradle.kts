@@ -29,14 +29,14 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    // statemachine
-    implementation("org.springframework.statemachine:spring-statemachine-core:3.2.0")
+    implementation("org.springframework.statemachine:spring-statemachine-core:3.2.0") // statemachine
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 
+    runtimeOnly("com.h2database:h2") // h2 database
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
