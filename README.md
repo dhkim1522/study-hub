@@ -1,2 +1,2 @@
 # statemachine
-Spring State Machine Project
+Kotlin & Spring State Machine Demo Project
