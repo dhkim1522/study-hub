@@ -2,7 +2,7 @@ package com.dhkim.springmodulith.stock
 
 import com.dhkim.springmodulith.order.OrderCreateEvent
 import org.springframework.context.ApplicationEventPublisher
-import org.springframework.context.event.EventListener
+import org.springframework.modulith.events.ApplicationModuleListener
 import org.springframework.stereotype.Service
 
 @Service
@@ -10,7 +10,7 @@ class StockService(
     private val stockRepository: StockRepository,
     private val publisher: ApplicationEventPublisher
 ) {
-    @EventListener
+    @ApplicationModuleListener
     fun handle(event: OrderCreateEvent) {
         println("재고 수정 처리 시작: 주문 번호 ${event.orderId}")
 

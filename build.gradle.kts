@@ -28,7 +28,7 @@ dependencies {
 
 	implementation("org.springframework.modulith:spring-modulith-starter-jpa")
 	implementation("org.springframework.modulith:spring-modulith-starter-core")
-//
+
 //	implementation("org.springframework.boot:spring-boot-starter-actuator")
 //	implementation("org.springframework.modulith:spring-modulith-observability")
 //	implementation("io.micrometer:micrometer-observation")

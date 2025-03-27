@@ -26,10 +26,8 @@ management:
   metrics:
     enable:
       all: true
-  prometheus:
-    metrics:
-      export:
-        enabled: true
+  observations:
+    event-publishing: true
 
 logging:
   level:
