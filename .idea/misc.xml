@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/concurrency-example" />
+    <file type="web" url="file://$PROJECT_DIR$/kotlin-basic" />
+    <file type="web" url="file://$PROJECT_DIR$/spring-basic-api-server" />
+    <file type="web" url="file://$PROJECT_DIR$/spring-modulith" />
+    <file type="web" url="file://$PROJECT_DIR$/statemachine" />
+  </component>
+  <component name="ProjectRootManager">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
