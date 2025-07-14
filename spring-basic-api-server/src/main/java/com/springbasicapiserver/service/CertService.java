@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ApiService {
+public class CertService {
 
     private final List<Cert> certStore = List.of(
             new Cert(1L, "cert1", "CN=cert1"),

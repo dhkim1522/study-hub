@@ -4,7 +4,7 @@ import com.springbasicapiserver.domain.Cert;
 import com.springbasicapiserver.error.ErrorCode;
 import com.springbasicapiserver.error.GlobalExceptionHandler;
 import com.springbasicapiserver.error.exception.CertNotFoundException;
-import com.springbasicapiserver.service.ApiService;
+import com.springbasicapiserver.service.CertService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,21 +21,21 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(controllers = ApiController.class)
-@Import({GlobalExceptionHandler.class, ApiControllerTest.TestConfig.class})
-class ApiControllerTest {
+@WebMvcTest(controllers = CertController.class)
+@Import({GlobalExceptionHandler.class, CertControllerTest.TestConfig.class})
+class CertControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
-    private ApiService apiService;
+    private CertService certService;
 
     @TestConfiguration
     static class TestConfig {
         @Bean
-        public ApiService apiService() {
-            return mock(ApiService.class);
+        public CertService apiService() {
+            return mock(CertService.class);
         }
     }
 
@@ -43,7 +43,7 @@ class ApiControllerTest {
     @DisplayName("getCertById: 존재하는 Cert ID로 조회하면 200 OK와 Cert를 반환한다")
     void getCertById_success() throws Exception {
         Cert cert = new Cert(1L, "test-cert", "CN=test");
-        given(apiService.findById(1L)).willReturn(cert);
+        given(certService.findById(1L)).willReturn(cert);
 
         mockMvc.perform(get("/api/cert/{id}", 1L))
                 .andDo(print())
@@ -56,7 +56,7 @@ class ApiControllerTest {
     @Test
     @DisplayName("getCertById: 존재하지 않는 Cert ID로 조회하면 404 NOT_FOUND 와 에러 메시지를 반환한다")
     void getCertById_notFound() throws Exception {
-        given(apiService.findById(999L)).willThrow(new CertNotFoundException());
+        given(certService.findById(999L)).willThrow(new CertNotFoundException());
 
         mockMvc.perform(get("/api/cert/{id}", 999L))
                 .andDo(print())
