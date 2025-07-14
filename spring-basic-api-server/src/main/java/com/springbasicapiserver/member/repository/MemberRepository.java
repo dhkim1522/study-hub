@@ -1,7 +1,7 @@
-package com.springbasicapiserver.repository;
+package com.springbasicapiserver.member.repository;
 
-import com.springbasicapiserver.domain.Member;
-import com.springbasicapiserver.domain.vo.PhoneNumber;
+import com.springbasicapiserver.member.domain.Member;
+import com.springbasicapiserver.member.domain.vo.PhoneNumber;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

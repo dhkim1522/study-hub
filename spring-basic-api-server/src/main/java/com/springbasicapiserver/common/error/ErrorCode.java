@@ -1,4 +1,4 @@
-package com.springbasicapiserver.error;
+package com.springbasicapiserver.common.error;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

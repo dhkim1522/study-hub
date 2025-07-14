@@ -1,10 +1,11 @@
 package com.springbasicapiserver.controller;
 
-import com.springbasicapiserver.domain.Cert;
-import com.springbasicapiserver.error.ErrorCode;
-import com.springbasicapiserver.error.GlobalExceptionHandler;
-import com.springbasicapiserver.error.exception.CertNotFoundException;
-import com.springbasicapiserver.service.CertService;
+import com.springbasicapiserver.cert.controller.CertController;
+import com.springbasicapiserver.cert.domain.Cert;
+import com.springbasicapiserver.common.error.ErrorCode;
+import com.springbasicapiserver.common.error.GlobalExceptionHandler;
+import com.springbasicapiserver.common.error.exception.CertNotFoundException;
+import com.springbasicapiserver.cert.service.CertService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

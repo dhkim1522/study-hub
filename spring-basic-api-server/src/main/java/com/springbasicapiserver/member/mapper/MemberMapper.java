@@ -1,8 +1,8 @@
-package com.springbasicapiserver.mapper;
+package com.springbasicapiserver.member.mapper;
 
-import com.springbasicapiserver.domain.Member;
-import com.springbasicapiserver.dto.MemberRequest;
-import com.springbasicapiserver.dto.MemberResponse;
+import com.springbasicapiserver.member.domain.Member;
+import com.springbasicapiserver.member.dto.MemberRequest;
+import com.springbasicapiserver.member.dto.MemberResponse;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

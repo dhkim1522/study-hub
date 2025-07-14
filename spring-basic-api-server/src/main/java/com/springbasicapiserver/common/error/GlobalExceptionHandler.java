@@ -1,6 +1,6 @@
-package com.springbasicapiserver.error;
+package com.springbasicapiserver.common.error;
 
-import com.springbasicapiserver.error.exception.BusinessBaseException;
+import com.springbasicapiserver.common.error.exception.BusinessBaseException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;

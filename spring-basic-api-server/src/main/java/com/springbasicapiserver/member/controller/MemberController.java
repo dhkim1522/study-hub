@@ -1,12 +1,10 @@
-package com.springbasicapiserver.controller;
+package com.springbasicapiserver.member.controller;
 
-import com.springbasicapiserver.domain.Member;
-import com.springbasicapiserver.domain.vo.PhoneNumber;
-import com.springbasicapiserver.dto.MemberRequest;
-import com.springbasicapiserver.dto.MemberResponse;
-import com.springbasicapiserver.service.MemberService;
+import com.springbasicapiserver.member.domain.vo.PhoneNumber;
+import com.springbasicapiserver.member.dto.MemberRequest;
+import com.springbasicapiserver.member.dto.MemberResponse;
+import com.springbasicapiserver.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import lombok.val;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

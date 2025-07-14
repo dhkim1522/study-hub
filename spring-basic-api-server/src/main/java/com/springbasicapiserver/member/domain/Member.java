@@ -1,7 +1,7 @@
-package com.springbasicapiserver.domain;
+package com.springbasicapiserver.member.domain;
 
-import com.springbasicapiserver.domain.vo.Age;
-import com.springbasicapiserver.domain.vo.PhoneNumber;
+import com.springbasicapiserver.member.domain.vo.Age;
+import com.springbasicapiserver.member.domain.vo.PhoneNumber;
 import jakarta.persistence.*;
 import lombok.*;
 

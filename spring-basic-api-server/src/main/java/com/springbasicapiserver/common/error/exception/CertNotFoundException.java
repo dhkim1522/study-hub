@@ -1,6 +1,6 @@
-package com.springbasicapiserver.error.exception;
+package com.springbasicapiserver.common.error.exception;
 
-import com.springbasicapiserver.error.ErrorCode;
+import com.springbasicapiserver.common.error.ErrorCode;
 
 public class CertNotFoundException extends NotFoundException {
     public CertNotFoundException() {

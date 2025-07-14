@@ -1,7 +1,7 @@
-package com.springbasicapiserver.controller;
+package com.springbasicapiserver.cert.controller;
 
-import com.springbasicapiserver.domain.Cert;
-import com.springbasicapiserver.service.CertService;
+import com.springbasicapiserver.cert.domain.Cert;
+import com.springbasicapiserver.cert.service.CertService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

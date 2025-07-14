@@ -1,11 +1,12 @@
 package com.springbasicapiserver.service;
 
-import com.springbasicapiserver.domain.Member;
-import com.springbasicapiserver.domain.vo.Age;
-import com.springbasicapiserver.domain.vo.PhoneNumber;
-import com.springbasicapiserver.dto.MemberRequest;
-import com.springbasicapiserver.dto.MemberResponse;
-import com.springbasicapiserver.repository.MemberRepository;
+import com.springbasicapiserver.member.domain.Member;
+import com.springbasicapiserver.member.domain.vo.Age;
+import com.springbasicapiserver.member.domain.vo.PhoneNumber;
+import com.springbasicapiserver.member.dto.MemberRequest;
+import com.springbasicapiserver.member.dto.MemberResponse;
+import com.springbasicapiserver.member.repository.MemberRepository;
+import com.springbasicapiserver.member.service.MemberService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

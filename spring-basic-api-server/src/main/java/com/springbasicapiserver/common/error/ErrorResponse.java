@@ -1,4 +1,4 @@
-package com.springbasicapiserver.error;
+package com.springbasicapiserver.common.error;
 
 import lombok.AccessLevel;
 import lombok.Getter;

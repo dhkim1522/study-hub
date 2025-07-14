@@ -1,4 +1,4 @@
-package com.springbasicapiserver.domain.vo;
+package com.springbasicapiserver.member.domain.vo;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;

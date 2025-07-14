@@ -1,7 +1,7 @@
-package com.springbasicapiserver.service;
+package com.springbasicapiserver.cert.service;
 
-import com.springbasicapiserver.domain.Cert;
-import com.springbasicapiserver.error.exception.CertNotFoundException;
+import com.springbasicapiserver.cert.domain.Cert;
+import com.springbasicapiserver.common.error.exception.CertNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
