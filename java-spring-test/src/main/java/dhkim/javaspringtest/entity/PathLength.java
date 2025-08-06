@@ -20,7 +20,7 @@ public final class PathLength {
         this.value = value;
     }
 
-    public Integer value() {
+    public Integer getValue() {
         return value;
     }
 
@@ -49,6 +49,6 @@ public final class PathLength {
     }
 
     public static PathLength of(Integer value) {
-        return PathLength.of(value);
+        return new PathLength(value);
     }
 }

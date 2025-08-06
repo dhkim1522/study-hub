@@ -1419,3 +1419,6 @@ form ca_cert [42000-232]
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]sellect *\000d\000afrom ca_cert"; expected "SAVEPOINT, SCRIPT, SHUTDOWN"; SQL statement:
 sellect *
 from ca_cert [42001-232]
+2025-08-06 15:02:25.651825+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "PROVIDER_ID CHARACTER VARYING(3)": "'provider1' (9)"; SQL statement:
+insert into ca_cert (ak_id,cert,created,created_by,issuer_id,key_algo,key_spec,last_issued,mo_id,not_after,not_before,path_length,provider_id,serial,sign_algo,sk_id,subject_dn,updated,updated_by,valid,wca_id,id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) [22001-232]

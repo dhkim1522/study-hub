@@ -31,11 +31,9 @@ public class CaCertService {
 
     @Transactional
     public CaCertDto.Response createCaCert(CaCertDto.Request request) {
-        CaCertEntity issuer = null;
-        if (request.getIssuerId() != null) {
-            issuer = caCertRepository.findById(request.getIssuerId())
-                    .orElseThrow(() -> new EntityNotFoundException("Issuer CA not found with ID: " + request.getIssuerId()));
-        }
+        CaCertEntity issuer = Optional.ofNullable(request.getIssuerId())
+                .flatMap(caCertRepository::findById)
+                .orElse(null);
 
         CaCertEntity caCertEntity = CaCertEntity.builder()
                 .cert(request.getCert())
@@ -96,11 +94,9 @@ public class CaCertService {
         CaCertEntity existingCaCert = caCertRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("CA Certificate not found with ID: " + id));
 
-        CaCertEntity issuer = null;
-        if (request.getIssuerId() != null) {
-            issuer = caCertRepository.findById(request.getIssuerId())
-                    .orElseThrow(() -> new EntityNotFoundException("Issuer CA not found with ID: " + request.getIssuerId()));
-        }
+        CaCertEntity issuer = Optional.ofNullable(request.getIssuerId())
+                .flatMap(caCertRepository::findById)
+                .orElse(null);
 
         // Update fields. Note: Some fields might not be intended for update via API, adjust as needed.
         // For simplicity, I'm assuming all fields in Request can be updated.

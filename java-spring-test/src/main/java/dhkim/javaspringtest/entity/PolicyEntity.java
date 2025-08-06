@@ -18,7 +18,7 @@ public class PolicyEntity extends BaseDomainEntity {
     @Column(name = "name", length = 128, nullable = false)
     private String name;
 
-    @Column(name = "provider_id", length = 3, nullable = false)
+    @Column(name = "provider_id", length = 10, nullable = false)
     private String providerId;
 
     @Builder

@@ -27,7 +27,7 @@ public class CaCertEntity extends BaseCertificateEntity {
     @AttributeOverride(name = "value", column = @Column(name = "path_length"))
     private PathLength pathLength;
 
-    @Column(name = "provider_id", length = 3)
+    @Column(name = "provider_id", length = 10)
     private String providerId;
 
     @Column(name = "wca_id", length = 25, nullable = false)
