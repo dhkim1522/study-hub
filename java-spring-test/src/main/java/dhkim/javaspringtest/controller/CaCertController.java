@@ -69,6 +69,12 @@ public class CaCertController {
         return ResponseEntity.ok(response);
     }
 
+    @PatchMapping("/{id}/issuer")
+    public ResponseEntity<CaCertDto.Response> updateCaCertIssuer(@PathVariable String id, @RequestParam(required = false) String newIssuerId) {
+        CaCertDto.Response response = caCertService.updateCaCertIssuer(id, newIssuerId);
+        return ResponseEntity.ok(response);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCaCert(@PathVariable String id) {
         caCertService.deleteCaCert(id);
