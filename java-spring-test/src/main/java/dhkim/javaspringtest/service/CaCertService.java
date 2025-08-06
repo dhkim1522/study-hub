@@ -17,6 +17,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Collections;
 
 @Service
 @RequiredArgsConstructor
@@ -165,5 +167,17 @@ public class CaCertService {
         policyRepository.deleteAll(policies);
 
         caCertRepository.delete(caCertToDelete);
+    }
+
+    public CaCertDto.Response getCaCertChain(String id) {
+        CaCertEntity caCert = caCertRepository.findByIdWithIssuerGraph(id)
+                .orElseThrow(() -> new EntityNotFoundException("CA Certificate not found with ID: " + id));
+
+        // The recursive population of issuerCert happens within CaCertDto.Response.from()
+        // With findCaCertByIdWithIssuerGraph, the first level of issuer is eagerly fetched.
+        // Subsequent levels will still trigger lazy loading if not already in the session.
+        // For fetching deeper chains in a single query, consider a custom JPQL query with JOIN FETCH
+        // or a native query with recursive CTEs if supported by your database.
+        return CaCertDto.Response.from(caCert);
     }
 }

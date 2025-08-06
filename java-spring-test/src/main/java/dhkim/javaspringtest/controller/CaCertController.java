@@ -38,7 +38,7 @@ public class CaCertController {
 
     @GetMapping("/by-path-length")
     public ResponseEntity<List<CaCertDto.Response>> getCaCertsByPathLength(@RequestParam Integer value) {
-        PathLength pathLength = new PathLength(value);
+        PathLength pathLength = PathLength.of(value);
         List<CaCertDto.Response> response = caCertService.getCaCertsByPathLength(pathLength);
         return ResponseEntity.ok(response);
     }
@@ -47,7 +47,7 @@ public class CaCertController {
     public ResponseEntity<List<CaCertDto.Response>> getValidAndLastIssuedCaCertsByPathLengthAndNotAfterGreaterThanEqual(
             @RequestParam Integer value,
             @RequestParam String notAfter) {
-        PathLength pathLength = new PathLength(value);
+        PathLength pathLength = PathLength.of(value);
         LocalDateTime notAfterDateTime = LocalDateTime.parse(notAfter);
         List<CaCertDto.Response> response = caCertService.getValidAndLastIssuedCaCertsByPathLengthAndNotAfterGreaterThanEqual(pathLength, notAfterDateTime);
         return ResponseEntity.ok(response);
@@ -57,7 +57,7 @@ public class CaCertController {
     public ResponseEntity<List<CaCertDto.Response>> getValidAndLastIssuedCaCertsByPathLengthAndNotAfterLessThanEqual(
             @RequestParam Integer value,
             @RequestParam String notAfter) {
-        PathLength pathLength = new PathLength(value);
+        PathLength pathLength = PathLength.of(value);
         LocalDateTime notAfterDateTime = LocalDateTime.parse(notAfter);
         List<CaCertDto.Response> response = caCertService.getValidAndLastIssuedCaCertsByPathLengthAndNotAfterLessThanEqual(pathLength, notAfterDateTime);
         return ResponseEntity.ok(response);
@@ -73,5 +73,11 @@ public class CaCertController {
     public ResponseEntity<Void> deleteCaCert(@PathVariable String id) {
         caCertService.deleteCaCert(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/chain")
+    public ResponseEntity<CaCertDto.Response> getCaCertChain(@PathVariable String id) {
+        CaCertDto.Response chain = caCertService.getCaCertChain(id);
+        return ResponseEntity.ok(chain);
     }
 }

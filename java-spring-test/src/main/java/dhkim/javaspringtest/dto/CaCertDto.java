@@ -55,16 +55,16 @@ public class CaCertDto {
         private String moId;
         private Boolean akId;
         private Boolean skId;
-        private Integer pathLength;
+        private PathLength pathLength;
         private String providerId;
         private String wcaId;
-        private String issuerId;
+        private CaCertDto.Response issuerCert; // Recursive field
         private CertStatus status;
         private LocalDateTime created;
         private LocalDateTime updated;
 
         public static Response from(CaCertEntity caCertEntity) {
-            return Response.builder()
+            ResponseBuilder builder = Response.builder()
                     .id(caCertEntity.getId())
                     .cert(caCertEntity.getCert())
                     .serial(caCertEntity.getSerial())
@@ -79,14 +79,19 @@ public class CaCertDto {
                     .moId(caCertEntity.getMoId())
                     .akId(caCertEntity.getAkId())
                     .skId(caCertEntity.getSkId())
-                    .pathLength(caCertEntity.getPathLength().value())
+                    .pathLength(caCertEntity.getPathLength())
                     .providerId(caCertEntity.getProviderId())
                     .wcaId(caCertEntity.getWcaId())
-                    .issuerId(caCertEntity.getIssuer() != null ? caCertEntity.getIssuer().getId() : null)
                     .status(caCertEntity.getStatus())
                     .created(caCertEntity.getCreated())
-                    .updated(caCertEntity.getUpdated())
-                    .build();
+                    .updated(caCertEntity.getUpdated());
+
+            // Recursively populate issuerCert
+            if (caCertEntity.getIssuer() != null) {
+                builder.issuerCert(Response.from(caCertEntity.getIssuer()));
+            }
+
+            return builder.build();
         }
     }
 }
