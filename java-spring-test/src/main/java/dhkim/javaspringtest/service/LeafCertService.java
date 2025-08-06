@@ -23,11 +23,8 @@ public class LeafCertService {
 
     @Transactional
     public LeafCertDto.Response createLeafCert(LeafCertDto.Request request) {
-        CaCertEntity issuer = null;
-        if (request.getIssuerId() != null) {
-            issuer = caCertRepository.findById(request.getIssuerId())
+        CaCertEntity issuer = caCertRepository.findById(request.getIssuerId())
                     .orElseThrow(() -> new EntityNotFoundException("Issuer CA not found with ID: " + request.getIssuerId()));
-        }
 
         LeafCertEntity leafCertEntity = LeafCertEntity.builder()
                 .cert(request.getCert())
@@ -66,11 +63,8 @@ public class LeafCertService {
         LeafCertEntity existingLeafCert = leafCertRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Leaf Certificate not found with ID: " + id));
 
-        CaCertEntity issuer = null;
-        if (request.getIssuerId() != null) {
-            issuer = caCertRepository.findById(request.getIssuerId())
-                    .orElseThrow(() -> new EntityNotFoundException("Issuer CA not found with ID: " + request.getIssuerId()));
-        }
+        CaCertEntity issuer = caCertRepository.findById(request.getIssuerId())
+                .orElseThrow(() -> new EntityNotFoundException("Issuer CA not found with ID: " + request.getIssuerId()));
 
         // Similar to CaCertEntity, LeafCertEntity fields are mostly immutable after creation.
         // To update other fields, you would need to add setters to BaseCertificateEntity and LeafCertEntity

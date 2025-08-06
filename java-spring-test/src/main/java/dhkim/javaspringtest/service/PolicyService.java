@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,11 +24,8 @@ public class PolicyService {
 
     @Transactional
     public PolicyDto.Response createPolicy(PolicyDto.Request request) {
-        CaCertEntity caCert = null;
-        if (request.getCaCertId() != null) {
-            caCert = caCertRepository.findById(request.getCaCertId())
-                    .orElseThrow(() -> new EntityNotFoundException("CA Certificate not found with ID: " + request.getCaCertId()));
-        }
+        CaCertEntity caCert = caCertRepository.findById(request.getCaCertId())
+                .orElseThrow(() -> new EntityNotFoundException("CA Certificate not found with ID: " + request.getCaCertId()));
 
         PolicyEntity policyEntity = PolicyEntity.builder()
                 .caCert(caCert)
@@ -56,16 +54,13 @@ public class PolicyService {
         PolicyEntity existingPolicy = policyRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Policy not found with ID: " + id));
 
-        CaCertEntity newCaCert = null;
-        if (request.getCaCertId() != null) {
-            newCaCert = caCertRepository.findById(request.getCaCertId())
-                    .orElseThrow(() -> new EntityNotFoundException("CA Certificate not found with ID: " + request.getCaCertId()));
-        }
+        CaCertEntity newCaCert = Optional.ofNullable(request.getCaCertId())
+                .flatMap(caCertRepository::findById)
+                .orElse(null);
 
         existingPolicy.updatePolicy(request.getName(), newCaCert);
 
-        PolicyEntity updatedPolicy = policyRepository.save(existingPolicy);
-        return PolicyDto.Response.from(updatedPolicy);
+        return PolicyDto.Response.from(existingPolicy);
     }
 
     @Transactional
