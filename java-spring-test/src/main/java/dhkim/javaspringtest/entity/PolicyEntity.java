@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "policy")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class PolicyEntity extends BaseEntity {
+public class PolicyEntity extends BaseDomainEntity {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ca_cert_id")
     private CaCertEntity caCert;
@@ -26,5 +26,14 @@ public class PolicyEntity extends BaseEntity {
         this.caCert = caCert;
         this.name = name;
         this.providerId = providerId;
+    }
+
+    public void updatePolicy(String newPolicyName, CaCertEntity newPolicyCert) {
+        this.name = newPolicyName;
+        this.caCert = newPolicyCert;
+    }
+
+    public String findCaCertId() {
+        return this.caCert.getId();
     }
 }

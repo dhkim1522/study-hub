@@ -9,7 +9,10 @@ import java.time.LocalDateTime;
 @Getter
 @Table(name = "ca_cert")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CaCertEntity extends BaseCertEntity {
+public class CaCertEntity extends BaseCertificateEntity {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "issuer_id")
+    private CaCertEntity issuer;
 
     @Column(name = "mo_id", nullable = false)
     private String moId;
@@ -30,15 +33,11 @@ public class CaCertEntity extends BaseCertEntity {
     @Column(name = "wca_id", length = 25, nullable = false)
     private String wcaId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "issuer_id")
-    private CaCertEntity issuer;
-
     @Builder
-    public CaCertEntity(String cert, String serial, String subjectDn, LocalDateTime notAfter, LocalDateTime notBefore,
-                        Boolean valid, Boolean lastIssued, String keyAlgo, String keySpec, String signAlgo,
-                        String moId, Boolean akId, Boolean skId, PathLength pathLength, String providerId,
-                        String wcaId, CaCertEntity issuer) {
+    private CaCertEntity(String cert, String serial, String subjectDn, LocalDateTime notAfter, LocalDateTime notBefore,
+                         Boolean valid, Boolean lastIssued, String keyAlgo, String keySpec, String signAlgo,
+                         String moId, Boolean akId, Boolean skId, PathLength pathLength, String providerId,
+                         String wcaId, CaCertEntity issuer) {
         super(cert, serial, subjectDn, notAfter, notBefore, valid, lastIssued, keyAlgo, keySpec, signAlgo);
         this.moId = moId;
         this.akId = akId;
@@ -50,6 +49,14 @@ public class CaCertEntity extends BaseCertEntity {
     }
 
     public boolean isRoot() {
-        return this.issuer == null && pathLength.value() == null;
+        return this.issuer == null && pathLength == null;
+    }
+
+    public String findIssuerId() {
+        return this.issuer.getId();
+    }
+
+    public void changeIssuer(CaCertEntity issuer) {
+        this.issuer = issuer;
     }
 }

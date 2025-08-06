@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public abstract class BaseEntity {
+public abstract class BaseDomainEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", length = 36)
@@ -24,13 +24,13 @@ public abstract class BaseEntity {
     @Column(name = "created", nullable = false, updatable = false)
     private LocalDateTime created;
 
-//    @Column(name = "created_by", nullable = false)
-//    private String createdBy;
-
     @LastModifiedDate
     @Column(name = "updated", nullable = false)
     private LocalDateTime updated;
 
-//    @Column(name = "updated_by", nullable = false)
-//    private String updatedBy;
+    @Column(name = "created_by")
+    private String createdBy;
+
+    @Column(name = "updated_by")
+    private String updatedBy;
 }

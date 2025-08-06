@@ -1,6 +1,7 @@
 package dhkim.javaspringtest.entity;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,9 +10,9 @@ import java.time.LocalDateTime;
 
 @Getter
 @MappedSuperclass
-@NoArgsConstructor
 @AllArgsConstructor
-public abstract class BaseCertEntity extends BaseEntity {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public abstract class BaseCertificateEntity extends BaseDomainEntity {
     @Column(name = "cert", length = 4000, nullable = false)
     private String cert;
 

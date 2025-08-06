@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 
@@ -104,7 +105,7 @@ class JavaSpringTestApplicationTests {
                 .keyAlgo("RSA")
                 .keySpec("2048")
                 .signAlgo("SHA256withRSA")
-                .caCert(subCa2)
+                .issuer(subCa2)
                 .cn("leaf.example.com")
                 .pfxCert("pfx-cert-data")
                 .build();
@@ -139,5 +140,23 @@ class JavaSpringTestApplicationTests {
         System.out.println("sub2: " + sub2.getSubjectDn());
         System.out.println("sub1 " + sub1.getSubjectDn());
         System.out.println("root " + root.getSubjectDn());
+    }
+
+    @Test
+    void findPathLengthTest() {
+        var now = LocalDateTime.now();
+
+        List<CaCertEntity> caCertList = caCertRepository
+                .findAllByPathLengthAndLastIssuedTrueAndValidTrueAndNotAfterLessThanEqual(PathLength.subCa1(),
+                        now);
+
+        System.out.println("CA Certs : " + caCertList.size());
+    }
+
+    @Test
+    void findPathLengthTest2() {
+        List<CaCertEntity> allByPathLength = caCertRepository.findAllByPathLength(PathLength.subCa1());
+
+        System.out.println("CA Certs : " + allByPathLength.size());
     }
 }

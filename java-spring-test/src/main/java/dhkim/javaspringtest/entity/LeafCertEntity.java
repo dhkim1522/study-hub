@@ -14,10 +14,10 @@ import java.time.LocalDateTime;
 @Table(name = "leaf_cert", indexes = {
         @Index(name = "leaf_cn_idx", columnList = "cn")
 })
-public class LeafCertEntity extends BaseCertEntity {
+public class LeafCertEntity extends BaseCertificateEntity {
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ca_cert_id")
-    private CaCertEntity caCert;
+    @JoinColumn(name = "issuer_id")
+    private CaCertEntity issuer;
 
     @Column(name = "cn", nullable = false)
     private String cn;
@@ -26,12 +26,16 @@ public class LeafCertEntity extends BaseCertEntity {
     private String pfxCert;
 
     @Builder
-    public LeafCertEntity(String cert, String serial, String subjectDn, LocalDateTime notAfter, LocalDateTime notBefore,
-                          Boolean valid, Boolean lastIssued, String keyAlgo, String keySpec, String signAlgo,
-                          CaCertEntity caCert, String cn, String pfxCert) {
+    private LeafCertEntity(String cert, String serial, String subjectDn, LocalDateTime notAfter, LocalDateTime notBefore,
+                           Boolean valid, Boolean lastIssued, String keyAlgo, String keySpec, String signAlgo,
+                           CaCertEntity issuer, String cn, String pfxCert) {
         super(cert, serial, subjectDn, notAfter, notBefore, valid, lastIssued, keyAlgo, keySpec, signAlgo);
-        this.caCert = caCert;
+        this.issuer = issuer;
         this.cn = cn;
         this.pfxCert = pfxCert;
+    }
+
+    public String findIssuerId() {
+        return this.issuer.getId();
     }
 }
